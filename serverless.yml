@@ -2,6 +2,7 @@ service: alpha-project
 
 plugins:
   - serverless-webpack
+  - serverless-offline
 
 custom:
   webpackIncludeModules: true
