@@ -1,7 +1,7 @@
-export async function main (event, context, callback) {
+export async function main(event, context, callback) {
   let response = null
 
-  await new Promise(res => {
+  await new Promise((resolve) => {
     response = {
       statusCode: 200,
       body: JSON.stringify({
@@ -9,7 +9,7 @@ export async function main (event, context, callback) {
         input: event,
       }),
     }
-    res()
+    resolve()
   })
 
   callback(null, response)
