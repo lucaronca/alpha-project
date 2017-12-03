@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/lucaronca/alpha-platform.git"
+    "url": "git@github.com:lucaronca/alpha-project.git"
   },
   "keywords": [
     "serverless",
