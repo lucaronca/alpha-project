@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+# The absolute, canonical ( no ".." ) path to this script
+FILEPATH=$(cd -P -- "$(dirname -- "$0")" && printf '%s\n' "$(pwd -P)/$(basename -- "$0")")
+DIRNAME=$(dirname "$FILEPATH")
+
+cd $DIRNAME/../../
+
+# redirect stdout to stderr
+exec 1>&2
+
+# enable user input (avoid the infamous "cannot enable tty mode on non tty input")
+exec < /dev/tty
+
+fail=0
+
+OLDIFS=$IFS
+IFS='
+'
+
+for filename in $(git diff-index --cached --name-only HEAD); do
+    eslint_errors=false
+
+    if [[ -f "$filename" && "$filename" =~ \.js?$ ]]; then
+        fixer_cmd='node_modules/.bin/eslint --ext="js" --fix ''"'$filename'"'
+        checksum_cmd='md5sum ''"'$filename'"'
+
+        checksum=$(eval $checksum_cmd)
+        fixer_output=$(eval $fixer_cmd)
+
+        if [ $? -ne 0 ]; then
+            fail=1
+        fi
+
+        while [ true ]; do
+            fixer_output2=$(eval $fixer_cmd)
+            if [[ $fixer_output == $fixer_output2 ]]; then
+              break
+            fi
+            fixer_output=$fixer_output2
+        done
+
+        if [[ $fail -eq 0 && $checksum != $(eval $checksum_cmd) ]]; then
+            eslint_errors=true
+            echo "ESLint fixed $filename"
+            fail=1
+        fi
+
+        if [ $fail -ne 0 ]; then
+            echo "$fixer_output"
+        fi
+    fi
+
+done
+
+if [ $eslint_errors = true ]; then
+    echo "Commit not perfomed due to ESlint errors"
+fi
+
+IFS=$OLDIFS
+
+exit $fail
