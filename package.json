@@ -4,7 +4,8 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "start:offline": "serverless offline"
+    "start:offline": "serverless offline",
+    "format": "prettier-eslint --write \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
