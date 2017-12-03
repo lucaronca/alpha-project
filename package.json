@@ -34,5 +34,8 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "serverless": "^1.24.1"
+  },
+  "scripts": {
+    "start:offline": "node_modules/.bin/serverless offline"
   }
 }
