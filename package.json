@@ -1,6 +1,7 @@
 {
   "name": "alpha-project",
   "version": "0.0.1",
+  "private": true,
   "description": "",
   "main": "handler.js",
   "scripts": {
@@ -18,7 +19,7 @@
     "mongodb"
   ],
   "author": "lucaronca",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://gitlab.com/lucaronca/alpha-platform/issues"
   },
