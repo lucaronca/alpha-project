@@ -21,9 +21,9 @@
   "author": "lucaronca",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://gitlab.com/lucaronca/alpha-platform/issues"
+    "url": "https://github.com/lucaronca/alpha-project/issues"
   },
-  "homepage": "https://gitlab.com/lucaronca/alpha-platform#README",
+  "homepage": "https://github.com/lucaronca/alpha-project",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
