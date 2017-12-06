@@ -46,6 +46,7 @@
   "dependencies": {
     "apollo-server-lambda": "^1.2.0",
     "babel-runtime": "^6.26.0",
+    "graphql": "^0.11.7",
     "serverless": "^1.24.1"
   }
 }
