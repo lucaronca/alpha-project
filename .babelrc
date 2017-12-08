@@ -1,4 +1,4 @@
 {
-    "plugins": ["transform-runtime"],
+    "plugins": ["transform-object-rest-spread", "transform-runtime"],
     "presets": ["es2017"]
 }
