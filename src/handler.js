@@ -1,4 +1,4 @@
-import { graphqlLambda } from 'apollo-server-lambda'
+import { graphqlLambda, graphiqlLambda } from 'apollo-server-lambda'
 import { makeExecutableSchema } from 'graphql-tools'
 
 import getTypeDefs from 'data/types'
@@ -30,4 +30,8 @@ export async function graphql(event, context, callback) {
 
   handler(event, context, callbackFilter)
 }
+
+export const graphiql = graphiqlLambda({
+  endpointURL: '/graphql',
+})
 
