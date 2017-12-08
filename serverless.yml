@@ -42,11 +42,20 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: src/hello.main
+  graphql:
+    handler: src/handler.graphql
     events:
       - http:
-          path: hello
+          path: graphql
+          method: get
+      - http:
+          path: graphql
+          method: post
+  graphiql:
+    handler: src/handler.graphiql
+    events:
+      - http:
+          path: graphiql
           method: get
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
