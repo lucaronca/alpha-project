@@ -19,6 +19,10 @@ module.exports = {
       },
     ],
   },
+  node: {
+    __dirname: true,
+    __filename: true,
+  },
   resolve: {
     modules: [resolve(__dirname, 'src'), 'node_modules'],
   },
