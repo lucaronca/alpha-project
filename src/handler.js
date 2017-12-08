@@ -1,19 +1,33 @@
-export async function main(event, context, callback) {
-  let response = null
+import { graphqlLambda } from 'apollo-server-lambda'
+import { makeExecutableSchema } from 'graphql-tools'
 
-  await new Promise((resolve) => {
-    response = {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      }),
-    }
-    resolve()
+import getTypeDefs from 'data/types'
+import resolvers from 'data/resolvers'
+
+async function getSchema() {
+  const typeDefs = await getTypeDefs()
+
+  return makeExecutableSchema({
+    typeDefs,
+    resolvers,
   })
-
-  callback(null, response)
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event })
 }
+
+export async function graphql(event, context, callback) {
+  const callbackFilter = (error, output) => {
+    const outputWithHeader = {
+      ...output,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    }
+
+    callback(error, outputWithHeader)
+  }
+
+  const schema = await getSchema()
+  const handler = graphqlLambda({ schema })
+
+  handler(event, context, callbackFilter)
+}
+
