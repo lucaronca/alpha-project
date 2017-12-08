@@ -1,8 +1,24 @@
-extends: airbnb-base
+parser: babel-eslint
+extends:
+  - airbnb-base
 
 rules:
+  max-len:
+    - error
+    - code: 120
+      ignoreComments: true
   import/prefer-default-export: off
   semi:
     - error
     - never
   arrow-parens: off
+
+env:
+  node: true
+
+settings:
+  import/resolver:
+    node:
+      moduleDirectory:
+        - node_modules
+        - src

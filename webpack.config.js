@@ -1,3 +1,4 @@
+const { resolve } = require('path')
 const slsw = require('serverless-webpack')
 const nodeExternals = require('webpack-node-externals')
 
@@ -17,5 +18,12 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+  },
+  node: {
+    __dirname: true,
+    __filename: true,
+  },
+  resolve: {
+    modules: [resolve(__dirname, 'src'), 'node_modules'],
   },
 }
