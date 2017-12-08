@@ -5,7 +5,7 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "start:offline": "serverless offline",
+    "start:offline": "node_modules/.bin/sls offline",
     "eslint": "eslint --fix \"src/**/*.js\"",
     "format": "prettier-eslint --write \"src/**/*.js\""
   },
