@@ -8,13 +8,16 @@ rules:
     - code: 120
       ignoreComments: true
   import/prefer-default-export: off
+  import/no-named-default: off
   semi:
     - error
     - never
   arrow-parens: off
+  global-require: off
 
 env:
   node: true
+  jest: true
 
 settings:
   import/resolver:
