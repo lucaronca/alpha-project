@@ -3,18 +3,21 @@ extends:
   - airbnb-base
 
 rules:
+  arrow-parens: off
+  global-require: off
+  import/prefer-default-export: off
+  import/no-named-default: off
   max-len:
     - error
     - code: 120
       ignoreComments: true
-  import/prefer-default-export: off
   semi:
     - error
     - never
-  arrow-parens: off
 
 env:
   node: true
+  jest: true
 
 settings:
   import/resolver:

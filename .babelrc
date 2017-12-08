@@ -1,4 +1,9 @@
 {
     "plugins": ["transform-object-rest-spread", "transform-runtime"],
-    "presets": ["es2017"]
+    "presets": ["es2017"],
+    "env": {
+        "test": {
+            "plugins": ["transform-es2015-modules-commonjs"]
+        }
+    }
 }
