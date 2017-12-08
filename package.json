@@ -7,7 +7,9 @@
   "scripts": {
     "start:offline": "node_modules/.bin/sls offline",
     "eslint": "eslint --fix \"src/**/*.js\"",
-    "format": "prettier-eslint --write \"src/**/*.js\""
+    "format": "prettier-eslint --write \"src/**/*.js\"",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
