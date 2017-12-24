@@ -1,4 +1,4 @@
-import { promisify } from 'util'
+import { promisify } from 'bluebird'
 import { readFile as nodeReadFile, readdir as nodeReaddir } from 'fs'
 import { resolve, extname } from 'path'
 
