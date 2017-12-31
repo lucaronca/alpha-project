@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 const slsw = require('serverless-webpack')
 const nodeExternals = require('webpack-node-externals')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: slsw.lib.entries,
@@ -26,4 +27,8 @@ module.exports = {
   resolve: {
     modules: [resolve(__dirname, 'src'), 'node_modules'],
   },
+  plugins: [
+    // Include .gql files in bundle
+    new CopyWebpackPlugin(['src/data/types/**/*.gql']),
+  ],
 }
