@@ -33,6 +33,5 @@ export async function graphql(event, context, callback) {
 }
 
 export const graphiql = graphiqlLambda({
-  endpointURL: '/graphql',
+  endpointURL: `/${process.env.STAGE}/graphql`,
 })
-
