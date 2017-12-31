@@ -60,6 +60,6 @@
     "graphql-tools": "^2.12.0",
     "merge-graphql-schemas": "^1.4.0",
     "ramda": "^0.25.0",
-    "serverless": "^1.24.1"
+    "serverless": "^1.25.0"
   }
 }
