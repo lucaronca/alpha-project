@@ -13,6 +13,7 @@ provider:
   runtime: nodejs6.10
   stage: dev
   region: us-east-1
+  environment: ${file(env.yml):${self:custom.stage}}
 
 functions:
   graphql:
