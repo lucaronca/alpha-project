@@ -10,7 +10,9 @@ const readdir = promisify(nodeReaddir)
 export async function getTypesFilePaths() {
   const fileNames = await readdir(__dirname)
 
-  return fileNames.filter(fileName => extname(fileName) === '.gql').map(fileName => resolve(__dirname, fileName))
+  return fileNames
+    .filter(fileName => extname(fileName) === '.gql')
+    .map(fileName => resolve(__dirname, fileName))
 }
 
 export async function getTypesData() {
