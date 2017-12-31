@@ -1,4 +1,4 @@
-import { promisify } from 'util'
+import { promisify } from 'bluebird'
 import { readFile as nodeReadFile, readdir as nodeReaddir } from 'fs'
 import { resolve, extname } from 'path'
 
@@ -10,7 +10,9 @@ const readdir = promisify(nodeReaddir)
 export async function getTypesFilePaths() {
   const fileNames = await readdir(__dirname)
 
-  return fileNames.filter(fileName => extname(fileName) === '.gql').map(fileName => resolve(__dirname, fileName))
+  return fileNames
+    .filter(fileName => extname(fileName) === '.gql')
+    .map(fileName => resolve(__dirname, fileName))
 }
 
 export async function getTypesData() {

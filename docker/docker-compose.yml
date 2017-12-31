@@ -1,0 +1,12 @@
+version: '3'
+services:
+  sls:
+    build:
+      context: ${PROJECT_ABSOLUTE_PATH}
+      dockerfile: ${PROJECT_ABSOLUTE_PATH}/docker/sls/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ${PROJECT_ABSOLUTE_PATH}:/app:delegated
+    command: node_modules/.bin/sls offline --host 0.0.0.0 --stage ${STAGE} --prefix ${STAGE}
+    ports:
+      - 80:3000
