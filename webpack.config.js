@@ -3,6 +3,8 @@ const slsw = require('serverless-webpack')
 const nodeExternals = require('webpack-node-externals')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const ROOT = resolve(__dirname, 'src')
+
 module.exports = {
   entry: slsw.lib.entries,
   target: 'node',
@@ -15,7 +17,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: __dirname,
+        include: ROOT,
         exclude: /node_modules/,
       },
     ],
@@ -25,7 +27,7 @@ module.exports = {
     __filename: true,
   },
   resolve: {
-    modules: [resolve(__dirname, 'src'), 'node_modules'],
+    modules: [ROOT, 'node_modules'],
   },
   plugins: [
     // Include .gql files in bundle
