@@ -7,6 +7,7 @@
   "scripts": {
     "start:local": "./docker/scripts/start.sh",
     "deploy": "node_modules/.bin/sls deploy",
+    "deploy:dev": "export STAGE=dev && yarn deploy",
     "eslint": "eslint --fix \"src/**/*.js\"",
     "format": "prettier-eslint --write \"src/**/*.js\"",
     "test": "jest",
