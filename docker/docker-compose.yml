@@ -7,6 +7,9 @@ services:
     restart: unless-stopped
     volumes:
       - ${PROJECT_ABSOLUTE_PATH}:/app:delegated
+    environment:
+      STAGE: ${STAGE}
+      SLS_DEBUG: '*'
     command: node_modules/.bin/sls offline --host 0.0.0.0 --stage ${STAGE} --prefix ${STAGE}
     ports:
       - 80:3000

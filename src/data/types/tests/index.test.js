@@ -4,7 +4,7 @@ import { vol, fs } from 'memfs'
 import { map, dropRepeats, contains, head, last } from 'ramda'
 import { mergeTypes } from 'merge-graphql-schemas'
 
-import getTypeDefs, { getTypesFilePaths, getTypesData } from '../'
+import getTypeDefs, { getTypesFilePaths, getTypesData } from '..'
 
 jest.mock('fs', () => require('memfs').fs)
 jest.mock('merge-graphql-schemas', () => ({
