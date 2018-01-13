@@ -1,4 +1,4 @@
-import webpackConfig from '..'
+import webpackConfig from '../getConfig'
 import getStage from '../utils/getStage'
 
 jest.mock('../configs/webpack.config.local', () =>
