@@ -11,8 +11,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
+        test: /\.ts$/,
+        loader: 'ts-loader',
         include: ROOT,
         exclude: /node_modules/,
       },
@@ -23,6 +23,7 @@ module.exports = {
     __filename: true,
   },
   resolve: {
+    extensions: ['.ts', '.js'], // Leave .js to handle node_modules dependecies
     modules: [ROOT, 'node_modules'],
   },
   plugins: [],
