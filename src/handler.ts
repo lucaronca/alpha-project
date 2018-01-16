@@ -1,11 +1,18 @@
-import { graphqlLambda, graphiqlLambda } from 'apollo-server-lambda'
+import {
+  graphqlLambda,
+  LambdaHandler,
+  graphiqlLambda,
+} from 'apollo-server-lambda'
 import { makeExecutableSchema } from 'graphql-tools'
+
+import { APIGatewayEvent, ProxyCallback, ProxyResult, Context, Handler, ProxyHandler } from 'aws-lambda'
+import { GraphQLSchema } from 'graphql'
 
 import getTypeDefs from 'data/types'
 import resolvers from 'data/resolvers'
 
-async function getSchema() {
-  const typeDefs = await getTypeDefs()
+async function getSchema(): Promise<GraphQLSchema> {
+  const typeDefs: string = await getTypeDefs()
 
   return makeExecutableSchema({
     typeDefs,
@@ -13,25 +20,25 @@ async function getSchema() {
   })
 }
 
-const addCORSHeader = output => ({
-  ...output,
+const addCORSHeader = (response: ProxyResult): ProxyResult => ({
+  ...response,
   headers: {
-    ...output.headers,
+    ...response.headers,
     'Access-Control-Allow-Origin': '*',
   },
 })
 
-const callbackFilterFactory = callback => (error, output) => {
-  callback(error, addCORSHeader(output))
+const callbackFilterFactory = (callback: ProxyCallback): ProxyCallback => (error: Error, response: ProxyResult): void => {
+  callback(error, addCORSHeader(response))
 }
 
-export async function graphql(event, context, callback) {
-  const schema = await getSchema()
-  const handler = graphqlLambda({ schema })
+export const graphql: ProxyHandler = async (event: APIGatewayEvent, context: Context, callback: ProxyCallback): Promise<void> => {
+  const schema: GraphQLSchema = await getSchema()
+  const handler: LambdaHandler = graphqlLambda({ schema })
 
   handler(event, context, callbackFilterFactory(callback))
 }
 
-export const graphiql = graphiqlLambda({
+export const graphiql: Handler = graphiqlLambda({
   endpointURL: `/${process.env.STAGE}/graphql`,
 })
