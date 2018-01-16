@@ -29,6 +29,9 @@
   },
   "homepage": "https://github.com/lucaronca/alpha-project",
   "devDependencies": {
+    "@types/aws-lambda": "^0.0.27",
+    "@types/graphql": "^0.11.8",
+    "@types/node": "^9.3.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-jest": "^21.2.0",
