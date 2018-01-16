@@ -11,7 +11,14 @@
     "eslint": "eslint --fix \"src/**/*.js\"",
     "format": "prettier-eslint --write \"src/**/*.js\"",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "precommit": "tsc --noEmit && lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint --fix -p tsconfig.json",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
