@@ -1,4 +1,6 @@
-export default {
+import { Resolver } from '.'
+
+export default <Resolver>{
   Query: {
     users: () => [],
     user: (_, args) => args,
