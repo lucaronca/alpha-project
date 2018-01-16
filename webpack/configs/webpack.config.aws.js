@@ -17,7 +17,7 @@ module.exports = {
           ecma: 6,
         },
         mangle: false,
-      }
+      },
     }),
     // Include .gql files in bundle
     new CopyWebpackPlugin(['src/data/types/**/*.gql']),

@@ -5,10 +5,17 @@ import {
 } from 'apollo-server-lambda'
 import { makeExecutableSchema } from 'graphql-tools'
 
-import { APIGatewayEvent, ProxyCallback, ProxyResult, Context, Handler, ProxyHandler } from 'aws-lambda'
+import {
+  APIGatewayEvent,
+  ProxyCallback,
+  ProxyResult,
+  Context,
+  Handler,
+  ProxyHandler,
+} from 'aws-lambda'
 import { GraphQLSchema } from 'graphql'
 
-import getTypeDefs from 'data/types'
+import { default as getTypeDefs } from 'data/types'
 import resolvers from 'data/resolvers'
 
 async function getSchema(): Promise<GraphQLSchema> {
@@ -28,11 +35,18 @@ const addCORSHeader = (response: ProxyResult): ProxyResult => ({
   },
 })
 
-const callbackFilterFactory = (callback: ProxyCallback): ProxyCallback => (error: Error, response: ProxyResult): void => {
+const callbackFilterFactory = (callback: ProxyCallback): ProxyCallback => (
+  error: Error,
+  response: ProxyResult,
+): void => {
   callback(error, addCORSHeader(response))
 }
 
-export const graphql: ProxyHandler = async (event: APIGatewayEvent, context: Context, callback: ProxyCallback): Promise<void> => {
+export const graphql: ProxyHandler = async (
+  event: APIGatewayEvent,
+  context: Context,
+  callback: ProxyCallback,
+): Promise<void> => {
   const schema: GraphQLSchema = await getSchema()
   const handler: LambdaHandler = graphqlLambda({ schema })
 

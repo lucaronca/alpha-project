@@ -1,14 +1,11 @@
 import webpackConfig from '../getConfig'
 import getStage from '../utils/getStage'
 
-jest.mock('../configs/webpack.config.local', () =>
-  ({ local: true }))
+jest.mock('../configs/webpack.config.local', () => ({ local: true }))
 
-jest.mock('../configs/webpack.config.aws', () =>
-  ({ aws: true }))
+jest.mock('../configs/webpack.config.aws', () => ({ aws: true }))
 
-jest.mock('../utils/getStage.js', () =>
-  jest.fn())
+jest.mock('../utils/getStage.js', () => jest.fn())
 
 describe('Webpack config factory', () => {
   it('should merge base config with webpack.config.local if stage is local', () => {

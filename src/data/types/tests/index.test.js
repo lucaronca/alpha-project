@@ -8,7 +8,7 @@ import getTypeDefs, { getTypesFilePaths, getTypesData } from '..'
 
 jest.mock('fs', () => require('memfs').fs)
 jest.mock('merge-graphql-schemas', () => ({
-  mergeTypes: jest.fn(),
+  mergeTypes: jest.fn()
 }))
 
 const getMockedFunctionFirstArg = func => head(last(func.mock.calls))
@@ -17,11 +17,14 @@ beforeAll(() => {
   const typesDir = resolve(__dirname, '..')
 
   // create an in memory version of the types folder contents
-  vol.fromJSON({
-    './test1.gql': 'type Test1 {}',
-    './test2.js': null,
-    './test3.gql': 'type Test3 {}',
-  }, typesDir)
+  vol.fromJSON(
+    {
+      './test1.gql': 'type Test1 {}',
+      './test2.js': null,
+      './test3.gql': 'type Test3 {}'
+    },
+    typesDir
+  )
 
   // insert there a mock directory for test too
   fs.mkdirSync(join(typesDir, 'testDir'))
@@ -49,11 +52,15 @@ describe('getTypesData', () => {
 })
 
 describe('getTypeDefs', () => {
-  it('should call \'mergeTypes\' with the array of .gpl Types files contents', async () => {
+  it("should call 'mergeTypes' with the array of .gpl Types files contents", async () => {
     await getTypeDefs()
 
     expect(mergeTypes).toBeCalled()
-    expect(contains('type Test1 {}', getMockedFunctionFirstArg(mergeTypes))).toBe(true)
-    expect(contains('type Test3 {}', getMockedFunctionFirstArg(mergeTypes))).toBe(true)
+    expect(
+      contains('type Test1 {}', getMockedFunctionFirstArg(mergeTypes))
+    ).toBe(true)
+    expect(
+      contains('type Test3 {}', getMockedFunctionFirstArg(mergeTypes))
+    ).toBe(true)
   })
 })

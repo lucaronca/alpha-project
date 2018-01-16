@@ -1,6 +1,6 @@
 import { Resolver } from '.'
 
-export default <Resolver>{
+export default {
   Query: {
     users: () => [],
     user: (_, args) => args,
@@ -13,4 +13,4 @@ export default <Resolver>{
       return 'ciao'
     },
   },
-}
+} as Resolver

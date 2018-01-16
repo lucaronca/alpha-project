@@ -18,11 +18,11 @@ const CONFIGS = [
   { stage: ['dev', 'prod'], config: aws },
 ]
 
-const getStageConfig = cond(map(
-  ({ stage, config }) => [flip(contains)(stage), always(config)],
-  CONFIGS
-))
+const getStageConfig = cond(
+  map(({ stage, config }) => [flip(contains)(stage), always(config)], CONFIGS),
+)
 
+// prettier-ignore
 module.exports = pipe(
   getStage,
   getStageConfig,
