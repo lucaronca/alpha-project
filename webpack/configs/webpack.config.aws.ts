@@ -1,7 +1,8 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+import webpack from 'webpack'
+import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin'
+import * as CopyWebpackPlugin from 'copy-webpack-plugin'
 
-module.exports = {
+export default {
   plugins: [
     new UglifyJsPlugin({
       parallel: true,
@@ -22,4 +23,4 @@ module.exports = {
     // Include .gql files in bundle
     new CopyWebpackPlugin(['src/data/types/**/*.gql']),
   ],
-}
+} as webpack.Configuration

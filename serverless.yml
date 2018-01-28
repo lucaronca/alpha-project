@@ -5,7 +5,7 @@ plugins:
   - serverless-offline
 
 custom:
-  webpack: 'webpack/index.js'
+  webpack: 'webpack/index.ts'
   webpackIncludeModules: true
   stage: ${opt:stage, self:provider.stage}
 

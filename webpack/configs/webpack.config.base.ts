@@ -1,11 +1,12 @@
-const { resolve } = require('path')
-const slswebpack = require('serverless-webpack')
+import { resolve } from 'path'
+import webpack from 'webpack'
+import * as slswebpack from 'serverless-webpack'
 
 const { lib: { entries } } = slswebpack
 
-const ROOT = resolve(__dirname, '..', '..', 'src')
+const ROOT: string = resolve(__dirname, '..', '..', 'src')
 
-module.exports = {
+export default {
   entry: entries,
   target: 'node',
   module: {
@@ -27,4 +28,4 @@ module.exports = {
     modules: [ROOT, 'node_modules'],
   },
   plugins: [],
-}
+} as webpack.Configuration
