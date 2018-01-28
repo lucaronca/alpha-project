@@ -4,7 +4,7 @@ import { vol, fs } from 'memfs'
 import { map, dropRepeats, contains, head, last } from 'ramda'
 import { mergeTypes } from 'merge-graphql-schemas'
 
-import getTypeDefs, { getTypesFilePaths, getTypesData } from '..'
+import { default as getTypeDefs, getTypesFilePaths, getTypesData } from '..'
 
 jest.mock('fs', () => require('memfs').fs)
 jest.mock('merge-graphql-schemas', () => ({
@@ -17,11 +17,14 @@ beforeAll(() => {
   const typesDir = resolve(__dirname, '..')
 
   // create an in memory version of the types folder contents
-  vol.fromJSON({
-    './test1.gql': 'type Test1 {}',
-    './test2.js': null,
-    './test3.gql': 'type Test3 {}',
-  }, typesDir)
+  vol.fromJSON(
+    {
+      './test1.gql': 'type Test1 {}',
+      './test2.js': null,
+      './test3.gql': 'type Test3 {}',
+    },
+    typesDir,
+  )
 
   // insert there a mock directory for test too
   fs.mkdirSync(join(typesDir, 'testDir'))
@@ -53,7 +56,11 @@ describe('getTypeDefs', () => {
     await getTypeDefs()
 
     expect(mergeTypes).toBeCalled()
-    expect(contains('type Test1 {}', getMockedFunctionFirstArg(mergeTypes))).toBe(true)
-    expect(contains('type Test3 {}', getMockedFunctionFirstArg(mergeTypes))).toBe(true)
+    expect(
+      contains('type Test1 {}', getMockedFunctionFirstArg(mergeTypes)),
+    ).toBe(true)
+    expect(
+      contains('type Test3 {}', getMockedFunctionFirstArg(mergeTypes)),
+    ).toBe(true)
   })
 })

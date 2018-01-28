@@ -8,10 +8,25 @@
     "start:local": "./docker/scripts/start.sh",
     "deploy": "node_modules/.bin/sls deploy",
     "deploy:dev": "export STAGE=dev && yarn deploy",
-    "eslint": "eslint --fix \"src/**/*.js\"",
-    "format": "prettier-eslint --write \"src/**/*.js\"",
+    "lint": "tslint --fix -p tsconfig.json",
+    "lint-fix": "prettier --no-semi --trailing-comma all --single-quote --write \"**/*.ts*\" && yarn lint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "precommit": "tsc --noEmit && lint-staged"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "/tests/.*\\.test\\.ts$",
+    "moduleFileExtensions": ["ts", "js", "json", "node"]
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --no-semi --trailing-comma all --single-quote --write",
+      "tslint --fix -p tsconfig.json",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -29,39 +44,35 @@
   },
   "homepage": "https://github.com/lucaronca/alpha-project",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.3",
-    "babel-jest": "^21.2.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2017": "^6.24.1",
+    "@types/aws-lambda": "^0.0.27",
+    "@types/graphql": "^0.11.8",
+    "@types/jest": "^22.0.1",
+    "@types/node": "^9.3.0",
+    "@types/webpack": "^3.8.3",
     "copy-webpack-plugin": "^4.3.1",
-    "eslint": "^4.12.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
     "jest": "^22.0.4",
+    "lint-staged": "^6.0.0",
     "memfs": "^2.6.0",
     "prettier-eslint-cli": "^4.4.1",
+    "serverless": "^1.25.0",
     "serverless-offline": "^3.16.0",
     "serverless-webpack": "^4.2.0",
+    "ts-jest": "^22.0.1",
+    "ts-loader": "^3.2.0",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.4.2",
+    "typescript": "^2.6.2",
     "uglifyjs-webpack-plugin": "^1.1.5",
     "webpack": "^3.8.1",
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
     "apollo-server-lambda": "^1.2.0",
-    "babel-runtime": "^6.26.0",
     "bluebird": "^3.5.1",
     "graphql": "^0.11.7",
-    "graphql-tools": "^2.12.0",
+    "graphql-tools": "^2.18.0",
     "merge-graphql-schemas": "^1.4.0",
-    "ramda": "^0.25.0",
-    "serverless": "^1.25.0"
+    "ramda": "^0.25.0"
   }
 }

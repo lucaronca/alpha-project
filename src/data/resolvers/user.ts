@@ -1,3 +1,5 @@
+import { Resolver } from '.'
+
 export default {
   Query: {
     users: () => [],
@@ -11,4 +13,4 @@ export default {
       return 'ciao'
     },
   },
-}
+} as Resolver
