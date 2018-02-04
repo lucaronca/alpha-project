@@ -1,10 +1,5 @@
-import { Resolver } from '.'
 
 export default {
-  Query: {
-    users: () => [],
-    user: (_, args) => args,
-  },
   User: {
     id() {
       return 1
@@ -13,4 +8,4 @@ export default {
       return 'ciao'
     },
   },
-} as Resolver
+}
