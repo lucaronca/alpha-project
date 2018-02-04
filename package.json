@@ -9,7 +9,8 @@
     "deploy": "node_modules/.bin/sls deploy",
     "deploy:dev": "export STAGE=dev && yarn deploy",
     "lint": "tslint --fix -p tsconfig.json",
-    "lint-fix": "prettier --no-semi --trailing-comma all --single-quote --write \"**/*.ts*\" && yarn lint",
+    "lint-fix":
+      "prettier --no-semi --trailing-comma all --single-quote --write \"**/*.ts*\" && yarn lint",
     "test": "jest",
     "test:watch": "jest --watch",
     "precommit": "tsc --noEmit && lint-staged"
@@ -32,11 +33,7 @@
     "type": "git",
     "url": "git@github.com:lucaronca/alpha-project.git"
   },
-  "keywords": [
-    "serverless",
-    "graphql",
-    "mongodb"
-  ],
+  "keywords": ["serverless", "graphql", "mongodb"],
   "author": "lucaronca",
   "license": "UNLICENSED",
   "bugs": {
