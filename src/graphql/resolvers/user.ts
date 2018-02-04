@@ -1,3 +1,5 @@
+import { Resolver } from '.'
+
 export default {
   User: {
     id() {
@@ -7,4 +9,4 @@ export default {
       return 'ciao'
     },
   },
-}
+} as Resolver
