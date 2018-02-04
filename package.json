@@ -9,7 +9,8 @@
     "deploy": "node_modules/.bin/sls deploy",
     "deploy:dev": "export STAGE=dev && yarn deploy",
     "lint": "tslint --fix -p tsconfig.json",
-    "lint-fix": "prettier --no-semi --trailing-comma all --single-quote --write \"**/*.ts*\" && yarn lint",
+    "lint-fix":
+      "prettier --no-semi --trailing-comma all --single-quote --write \"**/*.{ts,json}\" && yarn lint",
     "test": "jest",
     "test:watch": "jest --watch",
     "precommit": "tsc --noEmit && lint-staged"
@@ -26,17 +27,17 @@
       "prettier --no-semi --trailing-comma all --single-quote --write",
       "tslint --fix -p tsconfig.json",
       "git add"
+    ],
+    "*.json": [
+      "prettier --no-semi --trailing-comma all --single-quote --write",
+      "git add"
     ]
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:lucaronca/alpha-project.git"
   },
-  "keywords": [
-    "serverless",
-    "graphql",
-    "mongodb"
-  ],
+  "keywords": ["serverless", "graphql", "mongodb"],
   "author": "lucaronca",
   "license": "UNLICENSED",
   "bugs": {
@@ -48,6 +49,7 @@
     "@types/graphql": "^0.11.8",
     "@types/jest": "^22.0.1",
     "@types/node": "^9.3.0",
+    "@types/ramda": "^0.25.17",
     "@types/webpack": "^3.8.3",
     "copy-webpack-plugin": "^4.3.1",
     "husky": "^0.14.3",
@@ -72,7 +74,6 @@
     "bluebird": "^3.5.1",
     "graphql": "^0.11.7",
     "graphql-tools": "^2.18.0",
-    "merge-graphql-schemas": "^1.4.0",
     "ramda": "^0.25.0"
   }
 }

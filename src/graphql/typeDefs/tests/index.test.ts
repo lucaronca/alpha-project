@@ -1,20 +1,16 @@
 import { resolve, join, extname } from 'path'
 
 import { vol, fs } from 'memfs'
-import { map, dropRepeats, contains, head, last } from 'ramda'
-import { mergeTypes } from 'merge-graphql-schemas'
+import { map, dropRepeats, contains } from 'ramda'
 
 import { default as getTypeDefs, getTypesFilePaths, getTypesData } from '..'
 
 jest.mock('fs', () => require('memfs').fs)
-jest.mock('merge-graphql-schemas', () => ({
-  mergeTypes: jest.fn(),
-}))
 
-const getMockedFunctionFirstArg = func => head(last(func.mock.calls))
+let typesDir
 
 beforeAll(() => {
-  const typesDir = resolve(__dirname, '..')
+  typesDir = resolve(__dirname, '..')
 
   // create an in memory version of the types folder contents
   vol.fromJSON(
@@ -31,8 +27,8 @@ beforeAll(() => {
 })
 
 describe('getTypesFilePaths', () => {
-  it('should get paths of .gpl files in types folder', async () => {
-    const paths = await getTypesFilePaths()
+  it('should get paths of .gpl files of a given directory', async () => {
+    const paths = await getTypesFilePaths(typesDir)
 
     expect(paths).toHaveLength(2)
 
@@ -43,8 +39,12 @@ describe('getTypesFilePaths', () => {
 })
 
 describe('getTypesData', () => {
-  it('should retrieve contents of .gpl files in types folder', async () => {
-    const contents = await getTypesData()
+  it('should retrieve contents of .gpl files given a path list', async () => {
+    const paths = [
+      resolve(typesDir, './test1.gql'),
+      resolve(typesDir, './test3.gql'),
+    ]
+    const contents: string[] = await getTypesData(paths)
 
     expect(contains('type Test1 {}', contents)).toBe(true)
     expect(contains('type Test3 {}', contents)).toBe(true)
@@ -52,15 +52,10 @@ describe('getTypesData', () => {
 })
 
 describe('getTypeDefs', () => {
-  it('should call \'mergeTypes\' with the array of .gpl Types files contents', async () => {
-    await getTypeDefs()
+  it('should return a list of valid graphql type definitions', async () => {
+    const typeDefs = await getTypeDefs()
 
-    expect(mergeTypes).toBeCalled()
-    expect(
-      contains('type Test1 {}', getMockedFunctionFirstArg(mergeTypes)),
-    ).toBe(true)
-    expect(
-      contains('type Test3 {}', getMockedFunctionFirstArg(mergeTypes)),
-    ).toBe(true)
+    expect(contains('type Test1 {}', typeDefs)).toBe(true)
+    expect(contains('type Test3 {}', typeDefs)).toBe(true)
   })
 })

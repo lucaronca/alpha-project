@@ -1,9 +1,10 @@
-import { mergeResolvers } from 'merge-graphql-schemas'
 import { GraphQLFieldResolver } from 'graphql'
+import { mergeAll } from 'ramda'
 
+import { default as queryResolver } from './query'
 import { default as userResolver } from './user'
 
-export type Resolver = {
+export type ResolverMap = {
   Query: {
     [key: string]: GraphQLFieldResolver<any, any>,
   }
@@ -15,4 +16,10 @@ export type Resolver = {
   },
 }
 
-export default mergeResolvers([userResolver]) as Resolver
+export type Resolver = {
+  [key: string]: {
+    [key: string]: GraphQLFieldResolver<any, any>,
+  },
+}
+
+export default mergeAll<Resolver>([queryResolver, userResolver]) as ResolverMap

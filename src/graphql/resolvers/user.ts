@@ -1,10 +1,6 @@
 import { Resolver } from '.'
 
 export default {
-  Query: {
-    users: () => [],
-    user: (_, args) => args,
-  },
   User: {
     id() {
       return 1
