@@ -27,6 +27,10 @@
       "prettier --no-semi --trailing-comma all --single-quote --write",
       "tslint --fix -p tsconfig.json",
       "git add"
+    ],
+    "*.json": [
+      "prettier --no-semi --trailing-comma all --single-quote --write",
+      "git add"
     ]
   },
   "repository": {
