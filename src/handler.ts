@@ -12,7 +12,7 @@ import {
   ProxyHandler,
 } from 'aws-lambda'
 
-import { default as getSchema } from 'data/schema'
+import { default as getSchema } from './graphql/schema'
 
 import { GraphQLSchema } from 'graphql'
 
