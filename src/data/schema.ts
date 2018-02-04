@@ -1,6 +1,6 @@
 import { makeExecutableSchema } from 'graphql-tools'
 
-import { default as getTypeDefs } from 'data/types'
+import { default as getTypeDefs } from 'data/typeDefs'
 import resolvers from 'data/resolvers'
 
 import { GraphQLSchema } from 'graphql'
