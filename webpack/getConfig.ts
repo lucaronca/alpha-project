@@ -1,32 +1,38 @@
 import webpack from 'webpack'
 import {
-  __,
-  head,
-  last,
   always,
   concat,
   cond,
   contains,
+  flip,
+  head,
+  last,
   map,
   mergeDeepWith,
   pipe,
+  Pred,
 } from 'ramda'
 import getStage from './utils/getStage'
 import { default as base } from './configs/webpack.config.base'
 import { default as local } from './configs/webpack.config.local'
 import { default as aws } from './configs/webpack.config.aws'
 
-interface IConfigDictionary extends Array<string[] | webpack.Configuration> {
-  0: string[]
-  1: webpack.Configuration
-}
-const CONFIGS: IConfigDictionary[] = [
+type configTuple = [string[], webpack.Configuration]
+
+// prettier-ignore
+const CONFIGS: configTuple[] = [
   [['local'], local],
   [['dev', 'prod'], aws],
 ]
 
 const getStageConfig: (stage: string) => webpack.Configuration = cond(
-  map(dict => [contains(__, head(dict)), always(last(dict))], CONFIGS),
+  map<configTuple, [Pred, () => webpack.Configuration]>(
+    tuple => [
+      flip(contains)(head(tuple) as string[]),
+      always(last(tuple) as webpack.Configuration),
+    ],
+    CONFIGS,
+  ),
 )
 
 // prettier-ignore
