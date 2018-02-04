@@ -31,15 +31,18 @@ const callbackFilterFactory = (callback: ProxyCallback): ProxyCallback => (
   callback(error, addCORSHeader(response))
 }
 
-export const graphql: ProxyHandler = async (
+export const graphql: ProxyHandler = (
   event: APIGatewayEvent,
   context: Context,
   callback: ProxyCallback,
-): Promise<void> => {
-  const schema: GraphQLSchema = await getSchema()
-  const handler: LambdaHandler = graphqlLambda({ schema })
+): void => {
+  getSchema()
+    .then((schema: GraphQLSchema) => {
+      const handler: LambdaHandler = graphqlLambda({ schema })
 
-  handler(event, context, callbackFilterFactory(callback))
+      handler(event, context, callbackFilterFactory(callback))
+    })
+    .catch(console.error)
 }
 
 export const graphiql: Handler = graphiqlLambda({
