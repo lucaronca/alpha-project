@@ -21,6 +21,6 @@ export default {
       },
     }),
     // Include .gql files in bundle
-    new CopyWebpackPlugin(['src/data/types/**/*.gql']),
+    new CopyWebpackPlugin(['src/graphql/typeDefs/**/*.gql']),
   ],
 } as webpack.Configuration
