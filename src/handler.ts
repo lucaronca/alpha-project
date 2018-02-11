@@ -12,6 +12,7 @@ import {
   ProxyHandler,
 } from 'aws-lambda'
 
+import logger from 'utils/logger'
 import { default as getSchema } from './graphql/schema'
 
 import { GraphQLSchema } from 'graphql'
@@ -42,7 +43,22 @@ export const graphql: ProxyHandler = (
 
       handler(event, context, callbackFilterFactory(callback))
     })
-    .catch(console.error)
+    .catch(error => {
+      logger.error(error)
+
+      callback(null, {
+        statusCode: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: null,
+          errors: [
+            { message: 'Error in the initialization of graphql server' },
+          ],
+        }),
+      } as ProxyResult)
+    })
 }
 
 export const graphiql: Handler = graphiqlLambda({
