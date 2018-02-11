@@ -13,3 +13,6 @@ coverage
 
 # Env varuables
 env.yml
+
+# Log folder
+log
