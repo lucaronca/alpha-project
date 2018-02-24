@@ -13,3 +13,6 @@ rules:
   interface-over-type-literal: false
   ordered-imports: false
   object-literal-sort-keys: false
+  strict-boolean-expressions:
+    - allow-undefined-union
+  ter-arrow-parens: false
