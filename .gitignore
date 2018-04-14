@@ -16,3 +16,7 @@ env.yml
 
 # Log folder
 log
+
+# Mongodb data db store directory
+docker/mongo/data/db/*
+!docker/mongo/data/db/.gitkeep

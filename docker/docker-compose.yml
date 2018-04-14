@@ -12,3 +12,15 @@ services:
     command: ./docker/sls/start.sh
     ports:
       - 80:3000
+    links:
+      - mongo
+  mongo:
+    image: mongo:latest
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ${PROJECT_ABSOLUTE_PATH}/docker/mongo/data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
