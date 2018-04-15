@@ -8,12 +8,13 @@ import {
   ProxyCallback,
   ProxyResult,
   Context,
-  Handler,
   ProxyHandler,
 } from 'aws-lambda'
+import { Connection } from 'mongoose'
 
+import { connectToDatabase } from 'db/mongo'
 import logger from 'utils/logger'
-import { default as getSchema } from './graphql/schema'
+import { default as getExecutableSchema } from 'data'
 
 import { GraphQLSchema } from 'graphql'
 
@@ -37,11 +38,15 @@ export const graphql: ProxyHandler = (
   context: Context,
   callback: ProxyCallback,
 ): void => {
-  getSchema()
-    .then((schema: GraphQLSchema) => {
-      const handler: LambdaHandler = graphqlLambda({ schema })
+  context.callbackWaitsForEmptyEventLoop = false
 
-      handler(event, context, callbackFilterFactory(callback))
+  Promise.all([connectToDatabase(), getExecutableSchema()])
+    .then(([_, executableSchema]: [Connection, GraphQLSchema]) => {
+      const handler: LambdaHandler = graphqlLambda({
+        schema: executableSchema,
+      })
+
+      handler(event, context, callbackFilter(callback))
     })
     .catch(error => {
       logger.error(error)
