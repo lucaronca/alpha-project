@@ -23,6 +23,8 @@ functions:
       - http:
           path: graphql
           method: post
+    environment:
+      STAGE: ${self:custom.stage}
   graphiql:
     handler: src/handler.graphiql
     events:
