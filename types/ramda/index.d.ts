@@ -4,6 +4,13 @@ declare module 'ramda' {
   // tslint:disable-next-line: interface-name
   interface Static {
     /**
+     * A special placeholder value used to specify "gaps" within curried functions, allowing partial
+     * application of anycombination of arguments, regardless of their positions.
+     * If g is a curried ternary function and _ is R.__, the following are equivalent:
+     */
+    __: any
+
+    /**
      * Creates a new function that runs each of the Promise returning functions supplied as parameters in turn,
      * passing the resolved value of each function invocation to the next function invocation,
      * beginning with whatever arguments were passed to the initial invocation.
