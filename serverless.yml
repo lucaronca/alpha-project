@@ -22,9 +22,6 @@ functions:
     events:
       - http:
           path: graphql
-          method: get
-      - http:
-          path: graphql
           method: post
   graphiql:
     handler: src/handler.graphiql
