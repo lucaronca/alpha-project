@@ -47,6 +47,7 @@
     "@types/aws-lambda": "^0.0.27",
     "@types/graphql": "^0.11.8",
     "@types/jest": "^22.0.1",
+    "@types/mongoose": "^5.0.9",
     "@types/node": "^9.6.5",
     "@types/ramda": "^0.25.17",
     "@types/webpack": "^3.8.3",
@@ -73,6 +74,7 @@
     "bluebird": "^3.5.1",
     "graphql": "^0.11.7",
     "graphql-tools": "^2.18.0",
+    "mongoose": "^5.0.9",
     "ramda": "^0.25.0",
     "winston": "3.0.0-rc4"
   }
