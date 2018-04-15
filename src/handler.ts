@@ -17,7 +17,7 @@ import { default as getSchema } from './graphql/schema'
 
 import { GraphQLSchema } from 'graphql'
 
-const addCORSHeader = (response: ProxyResult): ProxyResult => ({
+const addHeaders = (response: ProxyResult): ProxyResult => ({
   ...response,
   headers: {
     ...response.headers,
@@ -25,11 +25,11 @@ const addCORSHeader = (response: ProxyResult): ProxyResult => ({
   },
 })
 
-const callbackFilterFactory = (callback: ProxyCallback): ProxyCallback => (
+const callbackFilter = (callback: ProxyCallback): ProxyCallback => (
   error: Error,
   response: ProxyResult,
 ): void => {
-  callback(error, addCORSHeader(response))
+  callback(error, addHeaders(response))
 }
 
 export const graphql: ProxyHandler = (
