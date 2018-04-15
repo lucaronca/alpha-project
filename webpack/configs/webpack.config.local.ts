@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-import * as nodeExternals from 'webpack-node-externals'
+import { default as nodeExternals } from 'webpack-node-externals'
 
 export default {
   // Don't bundle all node dependencies in local env

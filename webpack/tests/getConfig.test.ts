@@ -1,4 +1,4 @@
-import * as webpack from 'webpack'
+import webpack from 'webpack'
 import getConfig from '../getConfig'
 import getStage from '../utils/getStage'
 
