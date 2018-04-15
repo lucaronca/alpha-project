@@ -16,3 +16,6 @@ rules:
   strict-boolean-expressions:
     - allow-undefined-union
   ter-arrow-parens: false
+  variable-name: false
+  object-shorthand-properties-first: false
+  interface-name: false
