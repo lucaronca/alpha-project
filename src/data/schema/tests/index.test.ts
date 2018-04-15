@@ -3,7 +3,7 @@ import { resolve, join, extname } from 'path'
 import { vol, fs } from 'memfs'
 import { map, dropRepeats, contains } from 'ramda'
 
-import { default as getTypeDefs, getTypesFilePaths, getTypesData } from '..'
+import { default as getSchema, getTypesFilePaths, getTypesData } from '..'
 
 jest.mock('fs', () => require('memfs').fs)
 
@@ -51,9 +51,9 @@ describe('getTypesData', () => {
   })
 })
 
-describe('getTypeDefs', () => {
-  it('should return a list of valid graphql type definitions', async () => {
-    const typeDefs = await getTypeDefs()
+describe('getSchema', () => {
+  it('should return a list of valid graphql definitions', async () => {
+    const typeDefs = await getSchema()
 
     expect(contains('type Test1 {}', typeDefs)).toBe(true)
     expect(contains('type Test3 {}', typeDefs)).toBe(true)
