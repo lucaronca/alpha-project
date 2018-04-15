@@ -66,6 +66,16 @@ export const graphql: ProxyHandler = (
     })
 }
 
-export const graphiql: Handler = graphiqlLambda({
-  endpointURL: `/${process.env.STAGE}/graphql`,
-})
+export const graphiql: ProxyHandler = (
+  event: APIGatewayEvent,
+  context: Context,
+  callback: ProxyCallback,
+): void => {
+  context.callbackWaitsForEmptyEventLoop = false
+
+  const handler: LambdaHandler = graphiqlLambda({
+    endpointURL: `/${process.env.STAGE}/graphql`,
+  })
+
+  handler(event, context, callback)
+}
