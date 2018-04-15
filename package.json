@@ -36,7 +36,7 @@
     "type": "git",
     "url": "git@github.com:lucaronca/alpha-project.git"
   },
-  "keywords": ["serverless", "graphql", "mongodb"],
+  "keywords": ["serverless", "graphql", "mongodb", "typescript"],
   "author": "lucaronca",
   "license": "UNLICENSED",
   "bugs": {
