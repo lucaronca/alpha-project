@@ -1,6 +1,6 @@
 import webpack from 'webpack'
-import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin'
-import * as CopyWebpackPlugin from 'copy-webpack-plugin'
+import { default as UglifyJsPlugin } from 'uglifyjs-webpack-plugin'
+import { default as CopyWebpackPlugin } from 'copy-webpack-plugin'
 
 export default {
   plugins: [
@@ -21,6 +21,6 @@ export default {
       },
     }),
     // Include .gql files in bundle
-    new CopyWebpackPlugin(['src/graphql/typeDefs/**/*.gql']),
+    new CopyWebpackPlugin(['src/data/schema/**/*.gql']),
   ],
 } as webpack.Configuration

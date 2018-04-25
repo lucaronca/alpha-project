@@ -5,7 +5,7 @@ plugins:
   - serverless-offline
 
 custom:
-  webpack: 'webpack/index.ts'
+  webpack: webpack/index.ts
   webpackIncludeModules: true
   stage: ${opt:stage, self:provider.stage}
 
@@ -22,10 +22,9 @@ functions:
     events:
       - http:
           path: graphql
-          method: get
-      - http:
-          path: graphql
           method: post
+    environment:
+      STAGE: ${self:custom.stage}
   graphiql:
     handler: src/handler.graphiql
     events:

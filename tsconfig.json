@@ -3,6 +3,7 @@
     "target": "es6",
     "module": "commonjs",
     "baseUrl": "src",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "lib": [
       "es6",
@@ -18,6 +19,6 @@
       "esnext.asynciterable"
     ]
   },
-  "include": ["src/**/*", "webpack/**/*", "types"],
+  "include": ["src/**/*", "webpack/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }

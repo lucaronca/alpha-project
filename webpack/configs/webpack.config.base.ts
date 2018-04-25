@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import webpack from 'webpack'
-import * as slswebpack from 'serverless-webpack'
+import { default as slswebpack } from 'serverless-webpack'
 
 const { lib: { entries } } = slswebpack
 

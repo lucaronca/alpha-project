@@ -1,3 +1,0 @@
-rules:
-  comma-dangle: off
-  import/no-extraneous-dependencies: off
